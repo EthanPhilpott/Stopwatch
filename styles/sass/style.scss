@@ -1,0 +1,238 @@
+@import "partials/_trig.scss";
+
+$min: (
+    start: 3,
+    step: 3,
+    max: 15,
+);
+$sec: (
+    start: 2,
+    step: 2,
+    max: 30,
+);
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    font-family: sans-serif;
+}
+
+@mixin Circle($width, $height, $bg) {
+    width: $width;
+    height: $height;
+    background-color: $bg;
+    border-radius: 50%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .clockface {
+        @include Circle(75vh, 75vh, whitesmoke);
+        border: solid gray 1vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .center-dot {
+            @include Circle(2.5vh, 2.5vh, black);
+            position: absolute;
+        }
+        ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            li {
+                position: absolute;
+            }
+        }
+        .min-face {
+            transform: translate(0, -15vh);
+            position: absolute;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            .min-dot {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                @include Circle(1.5vh, 1.5vh, black);
+            }
+            .min-marks {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                * {
+                    position: absolute;
+                    width: 0.5vh;
+                    height: #{($TWO_PI * 5.5) / (
+                            (60 / map-get($sec, "max")) * map-get($min, "max")
+                        )}vh;
+                }
+                $turn: ($TWO_PI / (map-get($min, "max")));
+                $upto: ((60 / map-get($sec, "max")) * map-get($min, "max"));
+                @for $amt from 0 to $upto + 1 {
+                    & :nth-of-type(#{$amt}) {
+                        transform: translate(
+                                cos($amt * $turn - $HALF_PI) * 7.5vh,
+                                sin($amt * $turn - $HALF_PI) * 7.5vh
+                            )
+                            rotate(#{$amt * $turn - $HALF_PI}rad);
+                    }
+                    @if $amt % 2 == 0 {
+                        & :nth-of-type(#{$amt}) {
+                            background-color: red;
+                        }
+                    }
+                }
+            }
+            .min-hand-cont {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                width: 16vh;
+                display: flex;
+                justify-content: flex-end;
+                .min-hand {
+                    width: 0;
+                    height: 0;
+                    border-top: 0.25vh solid transparent;
+                    border-bottom: 0.25vh solid transparent;
+                    border-left: 9vh solid black;
+                    transform-origin: 12.25% 50%;
+                    transform: rotate(45deg);
+                }
+            }
+            .min-round-outline {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include Circle(16.5vh, 16.5vh, gray);
+                .min-round-cover {
+                    @include Circle(15.5vh, 15.5vh, whitesmoke);
+                }
+            }
+            .min-num {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                font-size: 2.5vh;
+                $turn: (
+                    $TWO_PI / (map-get($min, "max") / map-get($min, "step"))
+                );
+                $upto: map-get($min, "max") / map-get($min, "step");
+                @for $amt from 0 to $upto + 1 {
+                    li:nth-of-type(#{$amt}) {
+                        transform: translate(
+                            cos($amt * $turn - $HALF_PI) * 5vh,
+                            sin($amt * $turn - $HALF_PI) * 5vh
+                        );
+                    }
+                }
+            }
+        }
+        .sec-face {
+            position: absolute;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            .sec-dashes {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                * {
+                    position: absolute;
+                }
+                $turn: ($TWO_PI / (map-get($sec, "max") * 10));
+                $upto: (map-get($sec, "max") * 10);
+                @for $amt from 0 to $upto + 1 {
+                    @if $amt % 10 == 0 {
+                        & :nth-of-type(#{$amt}) {
+                            transform: translate(
+                                    cos($amt * $turn - $HALF_PI) * 34vh,
+                                    sin($amt * $turn - $HALF_PI) * 34vh
+                                )
+                                rotate(#{$amt * $turn - $HALF_PI}rad);
+                        }
+                    } @else if $amt % 5 == 0 {
+                        & :nth-of-type(#{$amt}) {
+                            transform: translate(
+                                    cos($amt * $turn - $HALF_PI) * 34.75vh,
+                                    sin($amt * $turn - $HALF_PI) * 34.75vh
+                                )
+                                rotate(#{$amt * $turn - $HALF_PI}rad);
+                        }
+                    } @else {
+                        & :nth-of-type(#{$amt}) {
+                            transform: translate(
+                                    cos($amt * $turn - $HALF_PI) * 35vh,
+                                    sin($amt * $turn - $HALF_PI) * 35vh
+                                )
+                                rotate(#{$amt * $turn - $HALF_PI}rad);
+                        }
+                    }
+                }
+                * {
+                    width: 2.5vh;
+                    height: 0.0125vh;
+                    background-color: black;
+                    &:nth-child(5n) {
+                        width: 3vh;
+                    }
+                    &:nth-child(10n) {
+                        width: 4.5vh;
+                        height: 0.2vh;
+                        background-color: red;
+                    }
+                }
+            }
+            .sec-hands {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                width: 70vh;
+                display: grid;
+                justify-content: flex-end;
+                .main {
+                    grid-row: 1 / 2;
+                    grid-column: 1 / 2;
+                    width: 0;
+                    height: 0;
+                    border-top: 0.75vh solid transparent;
+                    border-bottom: 0.75vh solid transparent;
+                    border-left: 40vh solid black;
+                    transform-origin: 12.25% 50%;
+                    transform: rotate(45deg);
+                }
+                .lap {
+                    @extend .main;
+                    border-left: 40vh solid red;
+                }
+            }
+            .sec-num {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                font-size: 3.5vh;
+                $turn: (
+                    $TWO_PI / (map-get($sec, "max") / map-get($sec, "step"))
+                );
+                $upto: map-get($sec, "max") / map-get($sec, "step");
+                @for $amt from 0 to $upto + 1 {
+                    li:nth-of-type(#{$amt}) {
+                        transform: translate(
+                            cos($amt * $turn - $HALF_PI) * 29vh,
+                            sin($amt * $turn - $HALF_PI) * 29vh
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

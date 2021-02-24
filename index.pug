@@ -1,0 +1,41 @@
+- let min = {start: 3, step: 3, max: 15};
+- let sec = {start: 2, step: 2, max: 30};
+
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='author' content='Ethan Philpott')
+    meta(name='description' content='')
+    meta(property='og:image' content='')
+    meta(property='og:title' content='')
+    meta(property='og:description' content='')
+    title Stopwatch
+    link(rel='stylesheet' href='../styles/css/min/style.min.css')
+    link(rel='shortcut icon' href='' type='image/x-icon')
+body 
+    .clockface
+        .center-dot 
+        .min-face
+            .min-marks 
+                -for (let i = 0; i < ((60 / sec.max) * min.max); i++)
+                    .mark 
+            ul.min-num
+                - for (let i = min.start; i <= min.max; i += min.step)
+                    li= i
+            .min-hand-cont 
+                .min-hand 
+            .min-round-outline
+                .min-round-cover 
+            .min-dot 
+        .sec-face 
+            .sec-dashes 
+                -for (let i = 0; i < 10 * sec.max; i++)
+                    .dash
+            ul.sec-num 
+                - for (let i = sec.start; i <= sec.max; i += sec.step)
+                    li= i
+            .sec-hands 
+                .lap 
+                .main 
+    script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
+    script(src='../scripts/main.js')
