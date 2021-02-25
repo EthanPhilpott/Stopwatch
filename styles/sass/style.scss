@@ -68,6 +68,9 @@ body {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                transform: rotate(
+                    -#{(60 / map-get($sec, "max")) * map-get($min, "max") / 2}rad
+                );
                 * {
                     position: absolute;
                     width: 0.5vh;
@@ -105,7 +108,7 @@ body {
                     border-bottom: 0.25vh solid transparent;
                     border-left: 9vh solid black;
                     transform-origin: 12.25% 50%;
-                    transform: rotate(45deg);
+                    transform: rotate(-90deg);
                 }
             }
             .min-round-outline {
@@ -209,7 +212,7 @@ body {
                     border-bottom: 0.75vh solid transparent;
                     border-left: 40vh solid black;
                     transform-origin: 12.25% 50%;
-                    transform: rotate(45deg);
+                    transform: rotate(-90deg);
                 }
                 .lap {
                     @extend .main;

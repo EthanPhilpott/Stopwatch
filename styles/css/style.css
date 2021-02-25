@@ -104,6 +104,8 @@ body .clockface .min-face .min-marks {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transform: rotate(-15rad);
+          transform: rotate(-15rad);
 }
 
 body .clockface .min-face .min-marks * {
@@ -355,8 +357,8 @@ body .clockface .min-face .min-hand-cont .min-hand {
   border-left: 9vh solid black;
   -webkit-transform-origin: 12.25% 50%;
           transform-origin: 12.25% 50%;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 
 body .clockface .min-face .min-round-outline {
@@ -2010,8 +2012,8 @@ body .clockface .sec-face .sec-hands .main, body .clockface .sec-face .sec-hands
   border-left: 40vh solid black;
   -webkit-transform-origin: 12.25% 50%;
           transform-origin: 12.25% 50%;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 
 body .clockface .sec-face .sec-hands .lap {
