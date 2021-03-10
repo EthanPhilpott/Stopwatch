@@ -22,6 +22,15 @@ body {
   height: 100vh;
 }
 
+body h1 {
+  width: 4vw;
+}
+
+body .lap-display {
+  width: 50vw;
+  height: 100vh;
+}
+
 body .clockface {
   width: 75vh;
   height: 75vh;

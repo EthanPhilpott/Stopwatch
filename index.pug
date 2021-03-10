@@ -10,11 +10,16 @@ head
     meta(property='og:title' content='')
     meta(property='og:description' content='')
     title Stopwatch
-    link(rel='stylesheet' href='../styles/css/min/style.min.css')
+    link(rel='stylesheet' href='styles/css/min/style.min.css')
     link(rel='shortcut icon' href='' type='image/x-icon')
 body 
+    h1 Wow, left click to start and stop and right click to lap and reset
+
+    .lap-display 
+        .whowhowhowhohow
+
     .clockface
-        .center-dot 
+        .center-dot
         .min-face
             .min-marks 
                 -for (let i = 0; i < ((60 / sec.max) * min.max); i++)
@@ -38,4 +43,4 @@ body
                 .lap 
                 .main 
     script(src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous")
-    script(src='../scripts/main.js')
+    script(src='scripts/main.js')

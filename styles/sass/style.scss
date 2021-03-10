@@ -33,6 +33,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    h1 {
+        width: 4vw;
+    }
+    .lap-display {
+        width: 50vw;
+        height: 100vh;
+    }
     .clockface {
         @include Circle(75vh, 75vh, whitesmoke);
         border: solid gray 1vh;
